@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PerfomanceComparison.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,17 +13,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static GlobalExtension;
 
 namespace PerfomanceComparison
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
-        public MainWindow()
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
+            if (sender == ButtonQuit)
+                SureQuit();
+
+            if (sender == ButtonStartTestStringVsStringBuilder)
+                StringVsStringBuilder();
         }
     }
 }

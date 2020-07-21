@@ -22,7 +22,7 @@
                 <Grid Grid.Row="1">
                     <StackPanel>
                         <DockPanel>
-                            <Button Content="Выход" Style="{StaticResource ButtonNegative}"/>
+                            <Button x:Name="ButtonQuit" Content="Выход" Style="{StaticResource ButtonNegative}" Click="Button_Click"/>
                         </DockPanel>
                     </StackPanel>
                 </Grid>
@@ -31,13 +31,8 @@
             <Grid Margin="0,0,8,8">
                 <StackPanel Margin="16,0,0,0">
                     <Label x:Name="TabTitle" Content="{Binding ElementName=ListComparisons, Path=SelectedItem.Content, Mode=OneWay}" Style="{StaticResource TitleMain}"/>
-                    <TabControl SelectedIndex="{Binding ElementName=ListComparisons,Path=SelectedIndex, Mode=OneWay}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
-                        <TabControl.ItemContainerStyle>
-                            <Style TargetType="{x:Type TabItem}">
-                                <Setter Property="Height" Value="0"/>
-                            </Style>
-                        </TabControl.ItemContainerStyle>
-                        <TabItem Header="String vs StringBuilder" Background="{x:Null}">
+                    <TabControl SelectedIndex="{Binding ElementName=ListComparisons,Path=SelectedIndex, Mode=OneWay}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" BorderBrush="{x:Null}" Foreground="{x:Null}" BorderThickness="0" Padding="0" Background="{x:Null}">
+                        <TabItem Header="String vs StringBuilder" Padding="0" BorderBrush="{x:Null}">
                             <ScrollViewer Background="{StaticResource PrimaryBackground}" BorderThickness="0" VerticalScrollBarVisibility="Auto">
                                 <Grid>
                                     <Grid>
@@ -61,13 +56,13 @@
                                             <Label Content="50 %" HorizontalAlignment="Center"/>
                                             <ProgressBar BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="32" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,8,0,8"/>
                                         </StackPanel>
-                                        <Button Grid.Row="4" Content="Начать тест" Style="{StaticResource ButtonPositive}"/>
+                                        <Button x:Name="ButtonStartTestStringVsStringBuilder" Grid.Row="4" Content="Начать тест" Style="{StaticResource ButtonPositive}" Click="Button_Click"/>
                                     </Grid>
-                                    
+
                                 </Grid>
                             </ScrollViewer>
                         </TabItem>
-                        <TabItem Header="2">
+                        <TabItem Header="2" BorderBrush="{x:Null}" Background="{x:Null}" Padding="0">
                         </TabItem>
                     </TabControl>
                 </StackPanel>

@@ -12,7 +12,8 @@
 
         <Thickness x:Key="ButtonMargin" Left="8" Top="8" Right="8" Bottom="8" />
 
-        <!--Основняа коллекция цветов-->
+        <!--Основная коллекция цветов-->
+        <Color x:Key="TransparentBackgroundColor">#669558A2</Color>
         <Color x:Key="PrimaryForegroundColor">#FFDEDEDE</Color>
         <Color x:Key="PositiveForegrondColor">#FF2E2E2E</Color>
         <Color x:Key="NegativeForegrondColor">#FFBFBFBF</Color>
@@ -46,6 +47,8 @@
         <!--              Всё ниже не требует редактирования              -->
         
         <!-- Коллекция кистей-->
+        <SolidColorBrush x:Key="TransparentBackground" Color="{StaticResource TransparentBackgroundColor}"/>
+        
         <SolidColorBrush x:Key="PrimaryAccent" Color="{StaticResource PrimaryAccentColor}"/>
         <SolidColorBrush x:Key="SecondaryAccent" Color="{StaticResource SecondaryAccentColor}"/>
         <SolidColorBrush x:Key="PrimaryForeground" Color="{StaticResource PrimaryForegroundColor}"/>
@@ -238,6 +241,23 @@
 
         <Style TargetType="ListViewItem">
             <Setter Property="Padding" Value="16,6,16,6"/>
+        </Style>
+
+        <Style TargetType="TabItem">
+            <Setter Property="Height" Value="0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid SnapsToDevicePixels="true">
+                                <ContentPresenter x:Name="Content" ContentSource="Header"
+                                          HorizontalAlignment="{Binding Path=HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                          VerticalAlignment="{Binding Path=VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
     </Application.Resources>
