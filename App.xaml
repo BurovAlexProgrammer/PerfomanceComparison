@@ -10,6 +10,9 @@
         <sys:Double x:Key="LabelFontSize">18</sys:Double>
         <sys:Double x:Key="ButtonFontSize">20</sys:Double>
 
+        <Thickness x:Key="ButtonMargin" Left="8" Top="8" Right="8" Bottom="8" />
+
+        <!--Основняа коллекция цветов-->
         <Color x:Key="PrimaryForegroundColor">#FFDEDEDE</Color>
         <Color x:Key="PositiveForegrondColor">#FF2E2E2E</Color>
         <Color x:Key="NegativeForegrondColor">#FFBFBFBF</Color>
@@ -18,9 +21,31 @@
         <Color x:Key="PrimaryBackgroundColor">#FF2E2E2E</Color>
         <Color x:Key="PrimaryAccentColor">#FF5DB811</Color>
         <Color x:Key="SecondaryAccentColor">#FF8211B8</Color>
-
         <Color x:Key="NeutralBackgroungColor">#FFD1D1D1</Color>
+
+        <Color x:Key="HoverPrimaryColor">#FF3C3C3C</Color>
+        <Color x:Key="HoverPrimaryAccentColor">#FF70C32A</Color>
+        <Color x:Key="HoverSecondaryAccentColor">#FF9439BF</Color>
+        <Color x:Key="HoverNeutralColor">#FFC5C5C5</Color>
+
+        <Color x:Key="PressedPrimaryColor">#FF5B5B5B</Color>
+        <Color x:Key="PressedPrimaryAccentColor">#FFA8DE7A</Color>
+        <Color x:Key="PressedSecondaryAccentColor">#FFB172CF</Color>
+        <Color x:Key="PressedNeutralColor">#FF9E9E9E</Color>
+
+        <Color x:Key="DisabledPrimaryColor">#FF6E6E6E</Color>
+        <Color x:Key="DisabledPrimaryAccentColor">#FFA8B89A</Color>
+        <Color x:Key="DisabledSecondaryAccentColor">#FFAC99B6</Color>
+        <Color x:Key="DisabledNeutralColor">#FF939393</Color>
+
+        <Color x:Key="DisabledPrimaryForegroundColor">#FFDADADA</Color>
+        <Color x:Key="DisabledPrimaryAccentForegroundColor">#FFDADADA</Color>
+        <Color x:Key="DisabledSecondaryAccentForegroundColor">#FFDADADA</Color>
+        <Color x:Key="DisabledNeutralForegroundColor">#FFDADADA</Color>
         
+        <!--              Всё ниже не требует редактирования              -->
+        
+        <!-- Коллекция кистей-->
         <SolidColorBrush x:Key="PrimaryForeground" Color="{StaticResource PrimaryForegroundColor}"/>
         <SolidColorBrush x:Key="PositiveForeground" Color="{StaticResource PositiveForegrondColor}"/>
         <SolidColorBrush x:Key="NegativeForeground" Color="{StaticResource NegativeForegrondColor}"/>
@@ -29,32 +54,64 @@
         <SolidColorBrush x:Key="PositiveBackground" Color="{StaticResource PrimaryAccentColor}"/>
         <SolidColorBrush x:Key="NegativeBackground" Color="{StaticResource SecondaryAccentColor}"/>
         <SolidColorBrush x:Key="NeutralBackground" Color="{StaticResource NeutralBackgroungColor}"/>
+
+        <SolidColorBrush x:Key="HoverPrimaryBackground" Color="{StaticResource HoverPrimaryColor}"/>
+        <SolidColorBrush x:Key="HoverPrimaryAccentBackground" Color="{StaticResource HoverPrimaryAccentColor}"/>
+        <SolidColorBrush x:Key="HoverSecondaryAccentBackground" Color="{StaticResource HoverSecondaryAccentColor}"/>
+        <SolidColorBrush x:Key="HoverNeutralBackground" Color="{StaticResource HoverNeutralColor}"/>
+
+        <SolidColorBrush x:Key="PressedPrimaryBackground" Color="{StaticResource PressedPrimaryColor}"/>
+        <SolidColorBrush x:Key="PressedPrimaryAccentBackground" Color="{StaticResource PressedPrimaryAccentColor}"/>
+        <SolidColorBrush x:Key="PressedSecondaryAccentBackground" Color="{StaticResource PressedSecondaryAccentColor}"/>
+        <SolidColorBrush x:Key="PressedNeutralBackground" Color="{StaticResource PressedNeutralColor}"/>
         
-        <!--Button style-->
-        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}" >
-            <Setter Property="Foreground" Value="Black" />
+        <SolidColorBrush x:Key="DisabledPrimaryBackground" Color="{StaticResource DisabledPrimaryColor}"/>
+        <SolidColorBrush x:Key="DisabledPrimaryAccentBackground" Color="{StaticResource DisabledPrimaryAccentColor}"/>
+        <SolidColorBrush x:Key="DisabledSecondaryAccentBackground" Color="{StaticResource DisabledSecondaryAccentColor}"/>
+        <SolidColorBrush x:Key="DisabledNeutralBackground" Color="{StaticResource PressedNeutralColor}"/>
+
+        <SolidColorBrush x:Key="DisabledPrimaryForeground" Color="{StaticResource DisabledPrimaryForegroundColor}"/>
+        <SolidColorBrush x:Key="DisabledPrimaryAccentForeground" Color="{StaticResource DisabledPrimaryAccentForegroundColor}"/>
+        <SolidColorBrush x:Key="DisabledSecondaryAccentForeground" Color="{StaticResource DisabledSecondaryAccentForegroundColor}"/>
+        <SolidColorBrush x:Key="DisabledNeutralForeground" Color="{StaticResource DisabledNeutralForegroundColor}"/>
+
+        
+        
+        <!-- СТИЛИ -->
+        
+        <Style x:Key="BackgroundMain">
+            <Setter Property="Control.Background" Value="{StaticResource PrimaryBackground}"/>
+            <Setter Property="Control.FontSize" Value="{StaticResource ButtonFontSize}"/>
+        </Style>
+
+        <!--  Стили кнопок  -->
+
+        <Style x:Key="ButtonNeutral" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="{StaticResource NeutralBackground}"/>
+            <Setter Property="Foreground" Value="{StaticResource NeutralForeground}"/>
             <Setter Property="FontSize" Value="{StaticResource ButtonFontSize}"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Control.Margin" Value="{StaticResource ButtonMargin}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="#FFC000" CornerRadius="3" x:Name="brd" MinWidth="90" Padding="12,4">
+                        <Border Background="{StaticResource NeutralBackground}" CornerRadius="3" x:Name="brd" MinWidth="90" Padding="12,4">
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                     Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="brd" Property="Background" Value="#FFCF40"/>
-                                <Setter Property="Foreground" Value="Black" />
+                                <Setter TargetName="brd" Property="Background" Value="{StaticResource HoverNeutralBackground}"/>
+                                <Setter Property="Foreground" Value="{StaticResource NeutralForeground}" />
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="brd" Property="Background" Value="#FFFDDB76"/>
-                                <Setter Property="Foreground" Value="Black" />
+                                <Setter TargetName="brd" Property="Background" Value="{StaticResource PressedNeutralBackground}"/>
+                                <Setter Property="Foreground" Value="{StaticResource NeutralForeground}" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="brd" Property="Background" Value="#FFFDE8A9"/>
-                                <Setter Property="Foreground" Value="#C0C0C0" />
+                                <Setter TargetName="brd" Property="Background" Value="{StaticResource DisabledNeutralBackground}"/>
+                                <Setter Property="Foreground" Value="{StaticResource DisabledNeutralForeground}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -62,30 +119,108 @@
             </Setter>
         </Style>
 
-        <Style x:Key="ButtonNeutral" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="Background" Value="{StaticResource NeutralBackground}"/>
-            <Setter Property="Foreground" Value="{StaticResource NeutralForeground}"/>
-            <Setter Property="FontSize" Value="{StaticResource ButtonFontSize}"/>
-        </Style>
-
         <Style x:Key="ButtonNegative" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Background" Value="{StaticResource NegativeBackground}"/>
             <Setter Property="Foreground" Value="{StaticResource NegativeForeground}"/>
             <Setter Property="FontSize" Value="{StaticResource ButtonFontSize}"/>
+            <Setter Property="Control.Margin" Value="{StaticResource ButtonMargin}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{StaticResource NegativeBackground}" CornerRadius="3" x:Name="brd" MinWidth="90" Padding="12,4">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="brd" Property="Background" Value="{StaticResource HoverSecondaryAccentBackground}"/>
+                                <Setter Property="Foreground" Value="{StaticResource NegativeForeground}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="brd" Property="Background" Value="{StaticResource PressedSecondaryAccentBackground}"/>
+                                <Setter Property="Foreground" Value="{StaticResource NegativeForeground}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="brd" Property="Background" Value="{StaticResource DisabledSecondaryAccentBackground}"/>
+                                <Setter Property="Foreground" Value="{StaticResource DisabledSecondaryAccentForeground}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <Style x:Key="ButtonPositive" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Background" Value="{StaticResource PositiveBackground}"/>
             <Setter Property="Foreground" Value="{StaticResource PositiveForeground}"/>
             <Setter Property="FontSize" Value="{StaticResource ButtonFontSize}"/>
+            <Setter Property="Control.Margin" Value="{StaticResource ButtonMargin}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{StaticResource PositiveBackground}" CornerRadius="3" x:Name="brd" MinWidth="90" Padding="12,4">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="brd" Property="Background" Value="{StaticResource HoverPrimaryAccentBackground}"/>
+                                <Setter Property="Foreground" Value="{StaticResource PositiveForeground}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="brd" Property="Background" Value="{StaticResource PressedPrimaryAccentBackground}"/>
+                                <Setter Property="Foreground" Value="{StaticResource PositiveForeground}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="brd" Property="Background" Value="{StaticResource DisabledPrimaryAccentBackground}"/>
+                                <Setter Property="Foreground" Value="{StaticResource DisabledPrimaryAccentForeground}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
+
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}" >
+            <Setter Property="Control.Foreground" Value="Black" />
+            <Setter Property="Control.FontSize" Value="{StaticResource ButtonFontSize}"/>
+            <Setter Property="Control.VerticalAlignment" Value="Center"/>
+            <Setter Property="Control.Margin" Value="{StaticResource ButtonMargin}"/>
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{StaticResource NeutralBackground}" CornerRadius="3" x:Name="brd" MinWidth="90" Padding="12,4">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="brd" Property="Background" Value="{StaticResource HoverNeutralBackground}"/>
+                                <Setter Property="Foreground" Value="{StaticResource NeutralForeground}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="brd" Property="Background" Value="{StaticResource PressedNeutralBackground}"/>
+                                <Setter Property="Foreground" Value="{StaticResource NeutralForeground}" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter TargetName="brd" Property="Background" Value="{StaticResource DisabledNeutralBackground}"/>
+                                <Setter Property="Foreground" Value="{StaticResource DisabledNeutralForeground}" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         
 
-        <Style x:Key="BackgroundMain">
-            <Setter Property="Control.Background" Value="{StaticResource PrimaryBackground}"/>
-            <Setter Property="Control.FontSize" Value="{StaticResource ButtonFontSize}"/>
-        </Style>
-
+        <!-- Надписи -->
+        
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="{StaticResource LabelFontSize}"/>
         </Style>
