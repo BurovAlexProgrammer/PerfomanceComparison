@@ -6,7 +6,33 @@
         xmlns:local="clr-namespace:PerfomanceComparison"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Style="{StaticResource BackgroundMain}">
+        <DockPanel>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+                <StackPanel>
+                    <ListView FontSize="17">
+                        <ListViewItem Content="String vs StringBuilder"/>
+                    </ListView>
+                    <Button/>
+                </StackPanel>
+                <Grid Grid.Row="1">
+                    <DockPanel>
+                        <Button Content="Выход"/>
+                        <Button Content="Выход" Style="{StaticResource ButtonNegative}" Foreground="#FFBFBFBF"/>
+                        <Button Content="Выход" Style="{StaticResource ButtonPositive}"/>
+                    </DockPanel>
+                </Grid>
+            </Grid>
 
+            <Grid>
+                <StackPanel Margin="16,0,0,0">
+                    <Label Content="Title" Style="{StaticResource TitleMain}" Margin="0,0,0,0" Padding="12,5,5,5"/>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
     </Grid>
 </Window>
