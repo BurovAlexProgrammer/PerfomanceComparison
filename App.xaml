@@ -46,6 +46,8 @@
         <!--              Всё ниже не требует редактирования              -->
         
         <!-- Коллекция кистей-->
+        <SolidColorBrush x:Key="PrimaryAccent" Color="{StaticResource PrimaryAccentColor}"/>
+        <SolidColorBrush x:Key="SecondaryAccent" Color="{StaticResource SecondaryAccentColor}"/>
         <SolidColorBrush x:Key="PrimaryForeground" Color="{StaticResource PrimaryForegroundColor}"/>
         <SolidColorBrush x:Key="PositiveForeground" Color="{StaticResource PositiveForegrondColor}"/>
         <SolidColorBrush x:Key="NegativeForeground" Color="{StaticResource NegativeForegrondColor}"/>
@@ -223,12 +225,19 @@
         
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="{StaticResource LabelFontSize}"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryForeground}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
         <Style x:Key="TitleMain" TargetType="Label">
             <Setter Property="FontSize" Value="{StaticResource TitleFontSize}"/>
             <Setter Property="FontWeight" Value="Bold"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryForeground}"/>
+            <Setter Property="Padding" Value="12,5,12,5"/>
+        </Style>
+
+        <Style TargetType="ListViewItem">
+            <Setter Property="Padding" Value="16,6,16,6"/>
         </Style>
 
     </Application.Resources>

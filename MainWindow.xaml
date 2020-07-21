@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PerfomanceComparison"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="795" Width="1000">
     <Grid Style="{StaticResource BackgroundMain}">
         <DockPanel>
             <Grid>
@@ -14,32 +14,62 @@
                     <RowDefinition Height="81.04"/>
                 </Grid.RowDefinitions>
                 <StackPanel>
-                    <ListView FontSize="17">
-                        <ListViewItem Content="String vs StringBuilder"/>
+                    <ListView FontSize="17" Margin="16,32,0,0" x:Name="ListComparisons">
+                        <ListViewItem Content="String vs StringBuilder" />
+                        <ListViewItem Content="2" Visibility="Collapsed"/>
                     </ListView>
-                    <Button/>
                 </StackPanel>
                 <Grid Grid.Row="1">
                     <StackPanel>
                         <DockPanel>
-                            <Button Content="Выход"/>
-                            <Button Content="Выход" Style="{StaticResource ButtonNeutral}"/>
                             <Button Content="Выход" Style="{StaticResource ButtonNegative}"/>
-                            <Button Content="Выход" Style="{StaticResource ButtonPositive}"/>
-                        </DockPanel>
-                        <DockPanel>
-                            <Button Content="Выход"/>
-                            <Button Content="Выход" Style="{StaticResource ButtonNeutral}" IsEnabled="False"/>
-                            <Button Content="Выход" Style="{StaticResource ButtonNegative}" IsEnabled="False"/>
-                            <Button Content="Выход" Style="{StaticResource ButtonPositive}" IsEnabled="False" Background="#FFDEDEDE"/>
                         </DockPanel>
                     </StackPanel>
                 </Grid>
             </Grid>
 
-            <Grid>
-                <StackPanel Margin="16,0,0,0" Background="#FF939393">
-                    <Label Content="Title" Style="{StaticResource TitleMain}" Padding="12,5,5,5" Foreground="#FFDADADA"/>
+            <Grid Margin="0,0,8,8">
+                <StackPanel Margin="16,0,0,0">
+                    <Label x:Name="TabTitle" Content="{Binding ElementName=ListComparisons, Path=SelectedItem.Content, Mode=OneWay}" Style="{StaticResource TitleMain}"/>
+                    <TabControl SelectedIndex="{Binding ElementName=ListComparisons,Path=SelectedIndex, Mode=OneWay}" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
+                        <TabControl.ItemContainerStyle>
+                            <Style TargetType="{x:Type TabItem}">
+                                <Setter Property="Height" Value="0"/>
+                            </Style>
+                        </TabControl.ItemContainerStyle>
+                        <TabItem Header="String vs StringBuilder" Background="{x:Null}">
+                            <ScrollViewer Background="{StaticResource PrimaryBackground}" BorderThickness="0" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="1" Content="String" Style="{StaticResource TitleMain}" Foreground="{StaticResource PrimaryAccent}"/>
+                                        <Label Grid.Column="2" Content="StringBuilder" Style="{StaticResource TitleMain}"  Foreground="{StaticResource SecondaryAccent}"/>
+                                        <Label Grid.Row="1" Grid.Column="0" Content="Количество операций"/>
+                                        <Label Grid.Row="2" Grid.Column="0" Content="Использование памяти"/>
+                                        <StackPanel x:Name="PanelProgress" Grid.Row="3" Grid.Column="1"  Grid.ColumnSpan="2">
+                                            <Label Content="50 %" HorizontalAlignment="Center"/>
+                                            <ProgressBar BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="32" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,8,0,8"/>
+                                        </StackPanel>
+                                        <Button Grid.Row="4" Content="Начать тест" Style="{StaticResource ButtonPositive}"/>
+                                    </Grid>
+                                    
+                                </Grid>
+                            </ScrollViewer>
+                        </TabItem>
+                        <TabItem Header="2">
+                        </TabItem>
+                    </TabControl>
                 </StackPanel>
             </Grid>
         </DockPanel>
