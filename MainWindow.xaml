@@ -5,7 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PerfomanceComparison"
         mc:Ignorable="d"
-        Title="MainWindow" Height="795" Width="1000">
+        Title="MainWindow" Height="795" Width="1000"
+        x:Name="currWindow">
+    <Window.DataContext>
+        StringModel
+    </Window.DataContext>
     <Grid Style="{StaticResource BackgroundMain}">
         <DockPanel>
             <Grid>
@@ -35,30 +39,48 @@
                         <TabItem Header="String vs StringBuilder" Padding="0" BorderBrush="{x:Null}">
                             <ScrollViewer Background="{StaticResource PrimaryBackground}" BorderThickness="0" VerticalScrollBarVisibility="Auto">
                                 <Grid>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-                                        <Label Grid.Column="1" Content="String" Style="{StaticResource TitleMain}" Foreground="{StaticResource PrimaryAccent}"/>
-                                        <Label Grid.Column="2" Content="StringBuilder" Style="{StaticResource TitleMain}"  Foreground="{StaticResource SecondaryAccent}"/>
-                                        <Label Grid.Row="1" Grid.Column="0" Content="Количество операций"/>
-                                        <Label Grid.Row="2" Grid.Column="0" Content="Использование памяти"/>
-                                        <StackPanel x:Name="PanelProgress" Grid.Row="3" Grid.Column="1"  Grid.ColumnSpan="2">
-                                            <Label Content="50 %" HorizontalAlignment="Center"/>
-                                            <ProgressBar BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="32" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,8,0,8"/>
-                                        </StackPanel>
-                                        <Button x:Name="ButtonStartTestStringVsStringBuilder" Grid.Row="4" Content="Начать тест" Style="{StaticResource ButtonPositive}" Click="Button_Click"/>
-                                    </Grid>
+                                    <DockPanel >
 
+                                        <StackPanel Grid.Column="0" HorizontalAlignment="Left">
+                                            <Label Height="{StaticResource BigCellHeight}"/>
+                                            <Label Content="Количество операций" Height="{StaticResource CellHeight}"/>
+                                            <Label Content="Использование памяти" Height="{StaticResource CellHeight}"/>
+                                            <Label Content="Пиковое использование памяти" Height="{StaticResource CellHeight}"/>
+                                            <Button x:Name="ButtonStartTestStringVsStringBuilder"  Content="Начать тест" Style="{StaticResource ButtonPositive}" Click="Button_Click" HorizontalAlignment="Stretch"/>
+
+                                        </StackPanel>
+                                        <StackPanel>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel x:Name="StringContent">
+                                                <Label Content="{Binding Path=Title}" Style="{StaticResource TitleMain}" Foreground="{StaticResource PrimaryAccent}"  Height="{StaticResource BigCellHeight}"/>
+                                                <Label Content="{Binding Path=ExecuteCount, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                <Label Content="{Binding Path=MemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                <Label Content="{Binding Path=PeakMemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="StringBuilderContent" Grid.Column="1">
+                                                <Label  Content="{Binding Path=Title}" Style="{StaticResource TitleMain}"  Foreground="{StaticResource SecondaryAccent}"/>
+                                                <Label Content="{Binding Path=ExecuteCount, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                <Label Content="{Binding Path=MemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                <Label Content="{Binding Path=PeakMemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Grid>
+                                            <StackPanel x:Name="Panel_StringPerformance"  Grid.ColumnSpan="2" DockPanel.Dock="Bottom">
+                                                <Separator/>
+                                                <Label Content="Производительность" HorizontalAlignment="Center"/>
+                                                <ProgressBar BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="32" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,8,0,8"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="Panel_StringMemoryUsed"  Grid.ColumnSpan="2" DockPanel.Dock="Bottom">
+                                                <Label Content="Использование памяти" HorizontalAlignment="Center"/>
+                                                <ProgressBar BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="32" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,8,0,0"/>
+                                                <ProgressBar BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="16" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,2,0,8"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                    </DockPanel>
                                 </Grid>
                             </ScrollViewer>
                         </TabItem>

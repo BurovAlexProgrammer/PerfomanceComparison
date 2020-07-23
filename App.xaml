@@ -10,6 +10,10 @@
         <sys:Double x:Key="LabelFontSize">18</sys:Double>
         <sys:Double x:Key="ButtonFontSize">20</sys:Double>
 
+        <sys:Double x:Key="CellHeight">34</sys:Double>
+        <sys:Double x:Key="BigCellHeight">50</sys:Double>
+
+
         <Thickness x:Key="ButtonMargin" Left="8" Top="8" Right="8" Bottom="8" />
 
         <!--Основная коллекция цветов-->
@@ -260,5 +264,14 @@
             </Setter>
         </Style>
 
+        <!--Остальное-->
+        <Style TargetType="Separator">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="White"/>
+        </Style>
+
+        <Style TargetType="ProgressBar">
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
     </Application.Resources>
 </Application>
