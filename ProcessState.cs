@@ -9,11 +9,13 @@ namespace PerfomanceComparison
     public class ProcessState : INotifyPropertyChanged
     {
         private string _title;
-        private int _executeCount;
-        private int _executeTime;
+        private long _executeCount;
+        private long _executeTime;
         private long _memoryUsed;
         private long _peakMemoryUsed;
-        //Название модели
+        /// <summary>
+        /// Название модели
+        /// </summary>
         public string Title
         {
             get { return _title; }
@@ -23,8 +25,10 @@ namespace PerfomanceComparison
                 NotifyPropertyChanged("Title");
             }
         }
-        //Количество выполненных операций
-        public int ExecuteCount
+        /// <summary>
+        /// Количество выполненных операций
+        /// </summary>
+        public long ExecuteCount
         {
             get { return _executeCount; }
             set
@@ -33,8 +37,10 @@ namespace PerfomanceComparison
                 NotifyPropertyChanged("ExecuteCount");
             }
         }
-        //Затраченное время на выполнение операций
-        public int ExecuteTime
+        /// <summary>
+        /// Затраченное время на выполнение операций
+        /// </summary>
+        public long ExecuteTime
         {
             get { return _executeTime; }
             set
@@ -43,7 +49,9 @@ namespace PerfomanceComparison
                 NotifyPropertyChanged("ExecuteTime");
             }
         }
-        //Используемая память
+        /// <summary>
+        /// Используемая память
+        /// </summary>
         public long MemoryUsed
         {
             get { return _memoryUsed; }
@@ -53,7 +61,9 @@ namespace PerfomanceComparison
                 NotifyPropertyChanged("MemoryUsed");
             }
         }
-        //Пиковая используемая память
+        /// <summary>
+        /// Пиковая используемая память
+        /// </summary>
         public long PeakMemoryUsed
         {
             get { return _peakMemoryUsed; }
@@ -61,6 +71,25 @@ namespace PerfomanceComparison
             {
                 _peakMemoryUsed = value;
                 NotifyPropertyChanged("PeakMemoryUsed");
+            }
+        }
+        /// <summary>
+        /// Расчет скорости выполнения итерации
+        /// </summary>
+        public float Speed { 
+            get
+            {
+                return 1f * ExecuteCount / Math.Max(1, ExecuteTime);
+            } 
+        }
+        /// <summary>
+        /// Рациональность использования памяти
+        /// </summary>
+        public float MemoryUsage
+        {
+            get
+            {
+                return 1f * ExecuteCount/ Math.Max(1, MemoryUsed);
             }
         }
 

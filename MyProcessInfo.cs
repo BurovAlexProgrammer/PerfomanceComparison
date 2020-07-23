@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
+/// <summary>
+/// Структура, используемая для обмена данными между приложениями
+/// </summary>
 public struct MyProcessInfo
 {
     public long executeTime;

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Documents;
+using static GlobalExtension;
 
 namespace PerfomanceComparison
 {
@@ -13,32 +15,105 @@ namespace PerfomanceComparison
     {
         public void StringVsStringBuilder()
         {
-            /*
-            //Создаем потоки без всяких TaskFactory для уверенности, что это не старый поток
-            new Thread(() => {
-                var stopwatch = new Stopwatch();
-                stopwatch.Start();
-                var resultList = new List<string>();
-                for (int i = 0; i < 100000; i++)
-                {
-                    resultList.Add(i.ToString());
-                    Console.WriteLine("Time: "+stopwatch.ElapsedMilliseconds);
-                }
-                stopwatch.Stop();
-            }).Start();
+            StringModelApp = Process.Start("Apps\\StringModel\\StringModel.exe");
+            StringBuilderModelApp = Process.Start("Apps\\StringBuilderModel\\StringBuilderModel.exe");
 
-            new Thread(() => {
-                var stopwatch = new Stopwatch();
-                stopwatch.Start();
-                var resultList = new List<string>();
-                for (int i = 0; i < 100000; i++)
+            taskList.Add(Task.Factory.StartNew(() => {
+                Listeners.StringApp(StringModel);
+            }, cancelTokenSource.Token));
+            taskList.Add(Task.Factory.StartNew(() =>
+            {
+                Listeners.StringBuilderApp(StringBuilderModel);
+            }, cancelTokenSource.Token));
+            taskList.Add(Task.Factory.StartNew(() =>
+            {
+                while (true)
                 {
-                    resultList.Add(i.ToString());
-                    Console.WriteLine("Time: " + stopwatch.ElapsedMilliseconds);
+                    CalculateStringPerformanceDifference();
+                    Thread.Sleep(200);
                 }
-                stopwatch.Stop();
-            }).Start();
-            */
+            }, cancelTokenSource.Token));
+        }
+
+        void CalculateStringPerformanceDifference()
+        {           
+            Dispatcher.Invoke(delegate ()
+            {
+                var currVal = progressbar_StringVsStringBuilder_PerformanceDiff.Value;
+                progressbar_StringVsStringBuilder_PerformanceDiff.Value = 
+                (StringModel.Speed.CompareToPercent(StringBuilderModel.Speed) + currVal * 5) / 6; //*5/6 сглаживание
+
+                currVal = progressbar_StringVsStringBuilder_MemoryDiff.Value;
+                progressbar_StringVsStringBuilder_MemoryDiff.Value = (StringModel.MemoryUsage.CompareToPercent(StringBuilderModel.MemoryUsage) + currVal * 5) / 6;
+                progressbar_StringVsStringBuilder_PeakMemoryDiff.Value = (StringBuilderModel.PeakMemoryUsed).CompareToPercent(StringModel.PeakMemoryUsed);
+        });
         }
     }
+
+    /// <summary>
+    /// Получение информации о состоянии приложения из общей памяти
+    /// </summary>
+    public static partial class Listeners
+    {
+        public static void StringApp(ProcessState processState)
+        {
+            var procInfoSize = Marshal.SizeOf<MyProcessInfo>();
+            while (true)
+            {
+                try
+                {
+                    MemoryMappedFile sharedMemory = MemoryMappedFile.OpenExisting("StringAppMemory");
+                    while (true)
+                    {
+                        using (MemoryMappedViewAccessor reader = sharedMemory.CreateViewAccessor(0, procInfoSize, MemoryMappedFileAccess.Read))
+                        {
+                            MyProcessInfo output;
+                            reader.Read<MyProcessInfo>(0, out output);
+                            processState.ExecuteCount = output.executeCount;
+                            processState.ExecuteTime = output.executeTime;
+                            processState.MemoryUsed = output.memoryUsed;
+                            processState.PeakMemoryUsed = output.peakMemoryUsed;
+                            Thread.Sleep(200);
+                        }
+                    }
+                }
+                catch (Exception exc)
+                {
+                    Console.WriteLine("Exception: "+ exc.Message);
+                    Thread.Sleep(2000);
+                }
+            }
+        }
+
+        public static void StringBuilderApp(ProcessState processState)
+        {
+            var procInfoSize = Marshal.SizeOf<MyProcessInfo>();
+            while (true)
+            {
+                try
+                {
+                    MemoryMappedFile sharedMemory = MemoryMappedFile.OpenExisting("StringBuilderAppMemory");
+                    while (true)
+                    {
+                        using (MemoryMappedViewAccessor reader = sharedMemory.CreateViewAccessor(0, procInfoSize, MemoryMappedFileAccess.Read))
+                        {
+                            MyProcessInfo output;
+                            reader.Read<MyProcessInfo>(0, out output);
+                            processState.ExecuteCount = output.executeCount;
+                            processState.ExecuteTime = output.executeTime;
+                            processState.MemoryUsed = output.memoryUsed;
+                            processState.PeakMemoryUsed = output.peakMemoryUsed;
+                            Thread.Sleep(200);
+                        }
+                    }
+                }
+                catch (Exception exc)
+                {
+                    Thread.Sleep(2000);
+                }
+            }
+        }
+    }
+
+    
 }

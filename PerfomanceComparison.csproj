@@ -6,4 +6,50 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Apps\StringBuilderModel\StringBuilderModel.deps.json" />
+    <None Remove="Apps\StringBuilderModel\StringBuilderModel.dll" />
+    <None Remove="Apps\StringBuilderModel\StringBuilderModel.exe" />
+    <None Remove="Apps\StringBuilderModel\StringBuilderModel.pdb" />
+    <None Remove="Apps\StringBuilderModel\StringBuilderModel.runtimeconfig.json" />
+    <None Remove="Apps\StringModel\StringModel.deps.json" />
+    <None Remove="Apps\StringModel\StringModel.dll" />
+    <None Remove="Apps\StringModel\StringModel.exe" />
+    <None Remove="Apps\StringModel\StringModel.pdb" />
+    <None Remove="Apps\StringModel\StringModel.runtimeconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Apps\StringBuilderModel\StringBuilderModel.deps.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StringBuilderModel\StringBuilderModel.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StringBuilderModel\StringBuilderModel.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StringBuilderModel\StringBuilderModel.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StringBuilderModel\StringBuilderModel.runtimeconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StringModel\StringModel.deps.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StringModel\StringModel.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StringModel\StringModel.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StringModel\StringModel.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StringModel\StringModel.runtimeconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

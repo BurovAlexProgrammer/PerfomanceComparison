@@ -6,10 +6,7 @@
         xmlns:local="clr-namespace:PerfomanceComparison"
         mc:Ignorable="d"
         Title="MainWindow" Height="795" Width="1000"
-        x:Name="currWindow">
-    <Window.DataContext>
-        StringModel
-    </Window.DataContext>
+        x:Name="currWindow" Closing="currWindow_Closing">
     <Grid Style="{StaticResource BackgroundMain}">
         <DockPanel>
             <Grid>
@@ -44,39 +41,42 @@
                                         <StackPanel Grid.Column="0" HorizontalAlignment="Left">
                                             <Label Height="{StaticResource BigCellHeight}"/>
                                             <Label Content="Количество операций" Height="{StaticResource CellHeight}"/>
+                                            <Label Content="Затраченное время" Height="{StaticResource CellHeight}"/>
                                             <Label Content="Использование памяти" Height="{StaticResource CellHeight}"/>
                                             <Label Content="Пиковое использование памяти" Height="{StaticResource CellHeight}"/>
                                             <Button x:Name="ButtonStartTestStringVsStringBuilder"  Content="Начать тест" Style="{StaticResource ButtonPositive}" Click="Button_Click" HorizontalAlignment="Stretch"/>
 
                                         </StackPanel>
                                         <StackPanel>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <StackPanel x:Name="StringContent">
-                                                <Label Content="{Binding Path=Title}" Style="{StaticResource TitleMain}" Foreground="{StaticResource PrimaryAccent}"  Height="{StaticResource BigCellHeight}"/>
-                                                <Label Content="{Binding Path=ExecuteCount, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
-                                                <Label Content="{Binding Path=MemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
-                                                <Label Content="{Binding Path=PeakMemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
-                                            </StackPanel>
-                                            <StackPanel x:Name="StringBuilderContent" Grid.Column="1">
-                                                <Label  Content="{Binding Path=Title}" Style="{StaticResource TitleMain}"  Foreground="{StaticResource SecondaryAccent}"/>
-                                                <Label Content="{Binding Path=ExecuteCount, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
-                                                <Label Content="{Binding Path=MemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
-                                                <Label Content="{Binding Path=PeakMemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
-                                            </StackPanel>
-                                        </Grid>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel x:Name="StringContent">
+                                                    <Label Content="{Binding Path=Title}" Style="{StaticResource TitleMain}" Foreground="{StaticResource PrimaryAccent}"  Height="{StaticResource BigCellHeight}"/>
+                                                    <Label Content="{Binding Path=ExecuteCount, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                    <Label Content="{Binding Path=ExecuteTime, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                    <Label Content="{Binding Path=MemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                    <Label Content="{Binding Path=PeakMemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                                <StackPanel x:Name="StringBuilderContent" Grid.Column="1">
+                                                    <Label  Content="{Binding Path=Title}" Style="{StaticResource TitleMain}"  Foreground="{StaticResource SecondaryAccent}" Height="{StaticResource BigCellHeight}"/>
+                                                    <Label Content="{Binding Path=ExecuteCount, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                    <Label Content="{Binding Path=ExecuteTime, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                    <Label Content="{Binding Path=MemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                    <Label Content="{Binding Path=PeakMemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Grid>
                                             <StackPanel x:Name="Panel_StringPerformance"  Grid.ColumnSpan="2" DockPanel.Dock="Bottom">
                                                 <Separator/>
                                                 <Label Content="Производительность" HorizontalAlignment="Center"/>
-                                                <ProgressBar BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="32" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,8,0,8"/>
+                                                <ProgressBar x:Name="progressbar_StringVsStringBuilder_PerformanceDiff" BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="32" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,8,0,8"/>
                                             </StackPanel>
                                             <StackPanel x:Name="Panel_StringMemoryUsed"  Grid.ColumnSpan="2" DockPanel.Dock="Bottom">
                                                 <Label Content="Использование памяти" HorizontalAlignment="Center"/>
-                                                <ProgressBar BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="32" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,8,0,0"/>
-                                                <ProgressBar BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="16" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,2,0,8"/>
+                                                <ProgressBar x:Name="progressbar_StringVsStringBuilder_MemoryDiff" BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="32" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,8,0,0"/>
+                                                <ProgressBar x:Name="progressbar_StringVsStringBuilder_PeakMemoryDiff" BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="16" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,2,0,8"/>
                                             </StackPanel>
                                         </StackPanel>
 

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:PerfomanceComparison"
              xmlns:sys="clr-namespace:System;assembly=System.Runtime"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow.xaml" Exit="Application_Exit">
     <Application.Resources>
 
         <sys:Double x:Key="TitleFontSize">28</sys:Double>

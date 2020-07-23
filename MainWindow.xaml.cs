@@ -1,8 +1,10 @@
 ﻿using PerfomanceComparison.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,6 +21,9 @@ namespace PerfomanceComparison
 {
     public partial class MainWindow : Window
     {
+        public static CancellationTokenSource cancelTokenSource = new CancellationTokenSource();
+        public static List<Task> taskList = new List<Task>();
+        public Process StringModelApp, StringBuilderModelApp;
         public MainWindow mainWindow;
 
         public ProcessState StringModel = new ProcessState() { Title = "String" };
@@ -42,12 +47,16 @@ namespace PerfomanceComparison
                 //Test();
                 Panel_StringPerformance.Show();
                 Panel_StringMemoryUsed.Show();
+                ButtonStartTestStringVsStringBuilder.Hide();
                 StringVsStringBuilder();
         }
 
-        void Test()
+        private void currWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            var x = StringModel.Title;
+            //Завершить все задачи и процессы
+            cancelTokenSource.Cancel();
+            StringModelApp.Kill();
+            StringBuilderModelApp.Kill();
         }
     }
 }

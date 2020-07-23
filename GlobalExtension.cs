@@ -10,7 +10,7 @@ public static class GlobalExtension
 {
     public static void Show(this Control control)
     {
-        control.Visibility = System.Windows.Visibility.Hidden;
+        control.Visibility = System.Windows.Visibility.Visible;
     }
     public static void Hide(this Control control)
     {
@@ -22,7 +22,7 @@ public static class GlobalExtension
     }
     public static void Show(this Panel control)
     {
-        control.Visibility = System.Windows.Visibility.Hidden;
+        control.Visibility = System.Windows.Visibility.Visible;
     }
     public static void Hide(this Panel control)
     {
@@ -52,6 +52,38 @@ public static class GlobalExtension
         System.Windows.Application.Current.Shutdown();
     }
 
+    /// <summary>
+    /// Сравнивает два числа и возвращает разницу от 100%. Т.е.  2.CompareTo(3) = 40%  ->  2/(2+3) * 100
+    /// </summary>
+    /// <returns></returns>
+    public static int CompareToPercent(this int a, int b)
+    {
+        if ((a + b) == 0) return 0;
+        var result = a / (a + b) * 100;
+        return result;
+    }
 
+    /// <summary>
+    /// Сравнивает два числа и возвращает разницу от 100%. Т.е.  2.CompareTo(3) = 40%  ->  2/(2+3) * 100
+    /// afterPoint - количество знаков после запятой
+    /// </summary>
+    /// <returns></returns>
+    public static float CompareToPercent(this float a, float b, int afterPoint = 0)
+    {
+        if ((a + b) == 0) return 0;
+        double result = a / (a + b) * 100;
+        return (float)Math.Round(result, afterPoint);
+    }
 
+    /// <summary>
+    /// Сравнивает два числа и возвращает разницу от 100%. Т.е.  2.CompareTo(3) = 40%  ->  2/(2+3) * 100
+    /// afterPoint - количество знаков после запятой
+    /// </summary>
+    /// <returns></returns>
+    public static long CompareToPercent(this long a, long b, int afterPoint = 0)
+    {
+        if ((a + b) == 0) return 0;
+        double result = 1f*a / (a + b) * 100;
+        return (long)Math.Round(result, afterPoint);
+    }
 }
