@@ -1,6 +1,7 @@
 ﻿using PerfomanceComparison.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,36 +55,16 @@ public static class GlobalExtension
 
     /// <summary>
     /// Сравнивает два числа и возвращает разницу от 100%. Т.е.  2.CompareTo(3) = 40%  ->  2/(2+3) * 100
-    /// </summary>
-    /// <returns></returns>
-    public static int CompareToPercent(this int a, int b)
-    {
-        if ((a + b) == 0) return 0;
-        var result = a / (a + b) * 100;
-        return result;
-    }
-
-    /// <summary>
-    /// Сравнивает два числа и возвращает разницу от 100%. Т.е.  2.CompareTo(3) = 40%  ->  2/(2+3) * 100
     /// afterPoint - количество знаков после запятой
     /// </summary>
     /// <returns></returns>
-    public static float CompareToPercent(this float a, float b, int afterPoint = 0)
+    public static long CompareToPercent<T>(T _a, T _b, int afterPoint = 0)
     {
+        if (_a == null | _b == null) throw new Exception("Exception: CompareToPercent cannot convert to decimal");
+        var a = Convert.ToDouble(_a);
+        var b = Convert.ToDouble(_b);
         if ((a + b) == 0) return 0;
-        double result = a / (a + b) * 100;
-        return (float)Math.Round(result, afterPoint);
-    }
-
-    /// <summary>
-    /// Сравнивает два числа и возвращает разницу от 100%. Т.е.  2.CompareTo(3) = 40%  ->  2/(2+3) * 100
-    /// afterPoint - количество знаков после запятой
-    /// </summary>
-    /// <returns></returns>
-    public static long CompareToPercent(this long a, long b, int afterPoint = 0)
-    {
-        if ((a + b) == 0) return 0;
-        double result = 1f*a / (a + b) * 100;
+        double result = 1f * a / (a + b) * 100;
         return (long)Math.Round(result, afterPoint);
     }
 }

@@ -9,10 +9,10 @@ namespace PerfomanceComparison
     public class ProcessState : INotifyPropertyChanged
     {
         private string _title;
-        private long _executeCount;
-        private long _executeTime;
-        private long _memoryUsed;
-        private long _peakMemoryUsed;
+        private long _executeCount = 0;
+        private long _executeTime = 0;
+        private long _memoryUsed = 0;
+        private long _peakMemoryUsed = 0;
         /// <summary>
         /// Название модели
         /// </summary>
@@ -76,12 +76,13 @@ namespace PerfomanceComparison
         /// <summary>
         /// Расчет скорости выполнения итерации
         /// </summary>
-        public float Speed { 
+        public float Speed
+        {
             get
             {
                 return 1f * ExecuteCount / Math.Max(1, ExecuteTime);
-            } 
-        }
+            }
+        } 
         /// <summary>
         /// Рациональность использования памяти
         /// </summary>

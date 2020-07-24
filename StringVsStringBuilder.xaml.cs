@@ -40,12 +40,12 @@ namespace PerfomanceComparison
             Dispatcher.Invoke(delegate ()
             {
                 var currVal = progressbar_StringVsStringBuilder_PerformanceDiff.Value;
-                progressbar_StringVsStringBuilder_PerformanceDiff.Value = 
-                (StringModel.Speed.CompareToPercent(StringBuilderModel.Speed) + currVal * 5) / 6; //*5/6 сглаживание
+                progressbar_StringVsStringBuilder_PerformanceDiff.Value =
+                (CompareToPercent(StringModel.Speed,StringBuilderModel.Speed) + currVal * 5) / 6; //*5/6 сглаживание
 
                 currVal = progressbar_StringVsStringBuilder_MemoryDiff.Value;
-                progressbar_StringVsStringBuilder_MemoryDiff.Value = (StringModel.MemoryUsage.CompareToPercent(StringBuilderModel.MemoryUsage) + currVal * 5) / 6;
-                progressbar_StringVsStringBuilder_PeakMemoryDiff.Value = (StringBuilderModel.PeakMemoryUsed).CompareToPercent(StringModel.PeakMemoryUsed);
+                progressbar_StringVsStringBuilder_MemoryDiff.Value = (CompareToPercent(StringModel.MemoryUsage,StringBuilderModel.MemoryUsage) + currVal * 5) / 6;
+                progressbar_StringVsStringBuilder_PeakMemoryDiff.Value = CompareToPercent(StringBuilderModel.PeakMemoryUsed,StringModel.PeakMemoryUsed);
         });
         }
     }
