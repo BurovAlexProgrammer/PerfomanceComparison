@@ -13,24 +13,27 @@ namespace PerfomanceComparison
 {
     public partial class MainWindow
     {
+        public Process StringModelApp, StringBuilderModelApp;
         public void StringVsStringBuilder()
         {
+            //Запуск приложений
             StringModelApp = Process.Start("Apps\\StringModel\\StringModel.exe");
             StringBuilderModelApp = Process.Start("Apps\\StringBuilderModel\\StringBuilderModel.exe");
-
+            //Слушатели приложений (проверяет адреса памяти приложений)
             taskList.Add(Task.Factory.StartNew(() => {
-                Listeners.StringApp(StringModel);
+                Listeners.ListenAppMemory(StringModel, "StringAppMemory");
             }, cancelTokenSource.Token));
             taskList.Add(Task.Factory.StartNew(() =>
             {
-                Listeners.StringBuilderApp(StringBuilderModel);
+                Listeners.ListenAppMemory(StringBuilderModel, "StringBuilderAppMemory");
             }, cancelTokenSource.Token));
+            //Обновление прогрессбаров
             taskList.Add(Task.Factory.StartNew(() =>
             {
                 while (true)
                 {
                     CalculateStringPerformanceDifference();
-                    Thread.Sleep(200);
+                    Thread.Sleep(100);
                 }
             }, cancelTokenSource.Token));
         }
@@ -49,71 +52,5 @@ namespace PerfomanceComparison
         });
         }
     }
-
-    /// <summary>
-    /// Получение информации о состоянии приложения из общей памяти
-    /// </summary>
-    public static partial class Listeners
-    {
-        public static void StringApp(ProcessState processState)
-        {
-            var procInfoSize = Marshal.SizeOf<MyProcessInfo>();
-            while (true)
-            {
-                try
-                {
-                    MemoryMappedFile sharedMemory = MemoryMappedFile.OpenExisting("StringAppMemory");
-                    while (true)
-                    {
-                        using (MemoryMappedViewAccessor reader = sharedMemory.CreateViewAccessor(0, procInfoSize, MemoryMappedFileAccess.Read))
-                        {
-                            MyProcessInfo output;
-                            reader.Read<MyProcessInfo>(0, out output);
-                            processState.ExecuteCount = output.executeCount;
-                            processState.ExecuteTime = output.executeTime;
-                            processState.MemoryUsed = output.memoryUsed;
-                            processState.PeakMemoryUsed = output.peakMemoryUsed;
-                            Thread.Sleep(200);
-                        }
-                    }
-                }
-                catch (Exception exc)
-                {
-                    Console.WriteLine("Exception: "+ exc.Message);
-                    Thread.Sleep(2000);
-                }
-            }
-        }
-
-        public static void StringBuilderApp(ProcessState processState)
-        {
-            var procInfoSize = Marshal.SizeOf<MyProcessInfo>();
-            while (true)
-            {
-                try
-                {
-                    MemoryMappedFile sharedMemory = MemoryMappedFile.OpenExisting("StringBuilderAppMemory");
-                    while (true)
-                    {
-                        using (MemoryMappedViewAccessor reader = sharedMemory.CreateViewAccessor(0, procInfoSize, MemoryMappedFileAccess.Read))
-                        {
-                            MyProcessInfo output;
-                            reader.Read<MyProcessInfo>(0, out output);
-                            processState.ExecuteCount = output.executeCount;
-                            processState.ExecuteTime = output.executeTime;
-                            processState.MemoryUsed = output.memoryUsed;
-                            processState.PeakMemoryUsed = output.peakMemoryUsed;
-                            Thread.Sleep(200);
-                        }
-                    }
-                }
-                catch (Exception exc)
-                {
-                    Thread.Sleep(2000);
-                }
-            }
-        }
-    }
-
     
 }

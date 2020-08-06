@@ -7,6 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Apps\BoxingWithin\BoxingWithin.deps.json" />
+    <None Remove="Apps\BoxingWithin\BoxingWithin.dll" />
+    <None Remove="Apps\BoxingWithin\BoxingWithin.exe" />
+    <None Remove="Apps\BoxingWithin\BoxingWithin.pdb" />
+    <None Remove="Apps\BoxingWithin\BoxingWithin.runtimeconfig.json" />
+    <None Remove="Apps\BoxingWithout\BoxingWithout.deps.json" />
+    <None Remove="Apps\BoxingWithout\BoxingWithout.dll" />
+    <None Remove="Apps\BoxingWithout\BoxingWithout.exe" />
+    <None Remove="Apps\BoxingWithout\BoxingWithout.pdb" />
+    <None Remove="Apps\BoxingWithout\BoxingWithout.runtimeconfig.json" />
     <None Remove="Apps\StringBuilderModel\StringBuilderModel.deps.json" />
     <None Remove="Apps\StringBuilderModel\StringBuilderModel.dll" />
     <None Remove="Apps\StringBuilderModel\StringBuilderModel.exe" />
@@ -20,6 +30,36 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Apps\BoxingWithin\BoxingWithin.deps.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\BoxingWithin\BoxingWithin.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\BoxingWithin\BoxingWithin.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\BoxingWithin\BoxingWithin.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\BoxingWithin\BoxingWithin.runtimeconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\BoxingWithout\BoxingWithout.deps.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\BoxingWithout\BoxingWithout.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\BoxingWithout\BoxingWithout.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\BoxingWithout\BoxingWithout.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\BoxingWithout\BoxingWithout.runtimeconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Apps\StringBuilderModel\StringBuilderModel.deps.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

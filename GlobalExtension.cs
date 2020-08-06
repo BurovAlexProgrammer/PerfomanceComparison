@@ -58,13 +58,13 @@ public static class GlobalExtension
     /// afterPoint - количество знаков после запятой
     /// </summary>
     /// <returns></returns>
-    public static long CompareToPercent<T>(T _a, T _b, int afterPoint = 0)
+    public static double CompareToPercent<T>(T _a, T _b, int afterPoint = 0)
     {
         if (_a == null | _b == null) throw new Exception("Exception: CompareToPercent cannot convert to decimal");
         var a = Convert.ToDouble(_a);
         var b = Convert.ToDouble(_b);
         if ((a + b) == 0) return 0;
         double result = 1f * a / (a + b) * 100;
-        return (long)Math.Round(result, afterPoint);
+        return Math.Round(result, afterPoint);
     }
 }
