@@ -33,6 +33,9 @@ namespace PerfomanceComparison
 
         public ProcessState BoxingWithinModel = new ProcessState() { Title = "Boxing within" };
         public ProcessState BoxingWithoutModel = new ProcessState() { Title = "Boxing without" };
+
+        public ProcessState ReferencesModel = new ProcessState() { Title = "References" };
+        public ProcessState StructModel = new ProcessState() { Title = "Struct" };
         public MainWindow()
         {
             mainWindow = this;
@@ -42,11 +45,16 @@ namespace PerfomanceComparison
             StringBuilderContent.DataContext = StringBuilderModel;
             Panel_StringPerformance.Collapse();
             Panel_StringMemoryUsed.Collapse();
-
+            //Boxing within/without
             BoxingWithinContent.DataContext = BoxingWithinModel;
             BoxingWithoutContent.DataContext = BoxingWithoutModel;
             Panel_BoxingPerformance.Collapse();
             Panel_BoxingMemoryUsed.Collapse();
+            //References vs Struct
+            ReferencesContent.DataContext = ReferencesModel;
+            StructContent.DataContext = StructModel;
+            Panel_StructPerformance.Collapse();
+            Panel_StructMemoryUsed.Collapse();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -69,6 +77,14 @@ namespace PerfomanceComparison
                 ButtonStartTestBoxingWithinVsWithout.Hide();
                 BoxingWithinVsWithout();
             }
+
+            if (sender == ButtonStartTestRefVsStruct)
+            {
+                Panel_StructPerformance.Show();
+                Panel_StructMemoryUsed.Show();
+                ButtonStartTestRefVsStruct.Hide();
+                RefVsStruct();
+            }
         }
 
         private void currWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -79,6 +95,8 @@ namespace PerfomanceComparison
             StringBuilderModelApp?.Kill();
             BoxingWithinModelApp?.Kill();
             BoxingWithoutModelApp?.Kill();
+            RefModelApp?.Kill();
+            StructModelApp?.Kill();
         }
 
         /// <summary>

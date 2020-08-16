@@ -17,6 +17,11 @@
     <None Remove="Apps\BoxingWithout\BoxingWithout.exe" />
     <None Remove="Apps\BoxingWithout\BoxingWithout.pdb" />
     <None Remove="Apps\BoxingWithout\BoxingWithout.runtimeconfig.json" />
+    <None Remove="Apps\ReferencesModel\ReferencesModel.deps.json" />
+    <None Remove="Apps\ReferencesModel\ReferencesModel.dll" />
+    <None Remove="Apps\ReferencesModel\ReferencesModel.exe" />
+    <None Remove="Apps\ReferencesModel\ReferencesModel.pdb" />
+    <None Remove="Apps\ReferencesModel\ReferencesModel.runtimeconfig.json" />
     <None Remove="Apps\StringBuilderModel\StringBuilderModel.deps.json" />
     <None Remove="Apps\StringBuilderModel\StringBuilderModel.dll" />
     <None Remove="Apps\StringBuilderModel\StringBuilderModel.exe" />
@@ -27,6 +32,11 @@
     <None Remove="Apps\StringModel\StringModel.exe" />
     <None Remove="Apps\StringModel\StringModel.pdb" />
     <None Remove="Apps\StringModel\StringModel.runtimeconfig.json" />
+    <None Remove="Apps\StructModel\StructModel.deps.json" />
+    <None Remove="Apps\StructModel\StructModel.dll" />
+    <None Remove="Apps\StructModel\StructModel.exe" />
+    <None Remove="Apps\StructModel\StructModel.pdb" />
+    <None Remove="Apps\StructModel\StructModel.runtimeconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -60,6 +70,21 @@
     <Content Include="Apps\BoxingWithout\BoxingWithout.runtimeconfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Apps\ReferencesModel\ReferencesModel.deps.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\ReferencesModel\ReferencesModel.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\ReferencesModel\ReferencesModel.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\ReferencesModel\ReferencesModel.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\ReferencesModel\ReferencesModel.runtimeconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Apps\StringBuilderModel\StringBuilderModel.deps.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -88,6 +113,21 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Apps\StringModel\StringModel.runtimeconfig.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StructModel\StructModel.deps.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StructModel\StructModel.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StructModel\StructModel.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StructModel\StructModel.pdb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Apps\StructModel\StructModel.runtimeconfig.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

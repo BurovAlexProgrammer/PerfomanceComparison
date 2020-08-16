@@ -39,7 +39,8 @@ namespace PerfomanceComparison
         }
 
         void CalculateStringPerformanceDifference()
-        {           
+        {
+            if (cancelTokenSource.Token.IsCancellationRequested) return; //Если задача отменена, то закончить исполнение
             Dispatcher.Invoke(delegate ()
             {
                 var currVal = progressbar_StringVsStringBuilder_PerformanceDiff.Value;

@@ -18,7 +18,7 @@
                     <ListView FontSize="17" Margin="16,32,0,0" x:Name="ListComparisons">
                         <ListViewItem Content="String vs StringBuilder" />
                         <ListViewItem Content="Boxing within vs without" />
-                        <ListViewItem Content="2" Visibility="Collapsed"/>
+                        <ListViewItem Content="References vs Struct"/>
                     </ListView>
                 </StackPanel>
                 <Grid Grid.Row="1">
@@ -134,7 +134,55 @@
                                 </Grid>
                             </ScrollViewer>
                         </TabItem>
-                        <TabItem Header="2" BorderBrush="{x:Null}" Background="{x:Null}" Padding="0">
+                        <TabItem Header="References vs Struct" Padding="0" BorderBrush="{x:Null}">
+                            <ScrollViewer Background="{StaticResource PrimaryBackground}" BorderThickness="0" VerticalScrollBarVisibility="Auto">
+                                <Grid>
+                                    <DockPanel >
+                                        <StackPanel Grid.Column="0" HorizontalAlignment="Left">
+                                            <Label Height="{StaticResource BigCellHeight}"/>
+                                            <Label Content="Количество операций" Height="{StaticResource CellHeight}"/>
+                                            <Label Content="Затраченное время" Height="{StaticResource CellHeight}"/>
+                                            <Label Content="Использование памяти" Height="{StaticResource CellHeight}"/>
+                                            <Label Content="Пиковое использование памяти" Height="{StaticResource CellHeight}"/>
+                                            <Button x:Name="ButtonStartTestRefVsStruct"  Content="Начать тест" Style="{StaticResource ButtonPositive}" Click="Button_Click" HorizontalAlignment="Stretch"/>
+
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel x:Name="ReferencesContent">
+                                                    <Label Content="{Binding Path=Title}" Style="{StaticResource TitleMain}" Foreground="{StaticResource PrimaryAccent}"  Height="{StaticResource BigCellHeight}"/>
+                                                    <Label Content="{Binding Path=ExecuteCount, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                    <Label Content="{Binding Path=ExecuteTime, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                    <Label Content="{Binding Path=MemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                    <Label Content="{Binding Path=PeakMemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                                <StackPanel x:Name="StructContent" Grid.Column="1">
+                                                    <Label  Content="{Binding Path=Title}" Style="{StaticResource TitleMain}"  Foreground="{StaticResource SecondaryAccent}" Height="{StaticResource BigCellHeight}"/>
+                                                    <Label Content="{Binding Path=ExecuteCount, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                    <Label Content="{Binding Path=ExecuteTime, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                    <Label Content="{Binding Path=MemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                    <Label Content="{Binding Path=PeakMemoryUsed, Mode=OneWay}" Height="{StaticResource CellHeight}" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                            </Grid>
+                                            <StackPanel x:Name="Panel_StructPerformance"  Grid.ColumnSpan="2" DockPanel.Dock="Bottom">
+                                                <Separator/>
+                                                <Label Content="Производительность" HorizontalAlignment="Center"/>
+                                                <ProgressBar x:Name="progressbar_Struct_PerformanceDiff" BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="32" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,8,0,8"/>
+                                            </StackPanel>
+                                            <StackPanel x:Name="Panel_StructMemoryUsed"  Grid.ColumnSpan="2" DockPanel.Dock="Bottom">
+                                                <Label Content="Использование памяти" HorizontalAlignment="Center"/>
+                                                <ProgressBar x:Name="progressbar_Struct_MemoryDiff" BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="32" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,8,0,0"/>
+                                                <ProgressBar x:Name="progressbar_Struct_PeakMemoryDiff" BorderBrush="Black"  Value="50" VerticalAlignment="Center" Height="16" Foreground="{StaticResource PositiveBackground}" Background="{StaticResource NegativeBackground}" Margin="0,2,0,8"/>
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                    </DockPanel>
+                                </Grid>
+                            </ScrollViewer>
                         </TabItem>
                     </TabControl>
                 </StackPanel>
